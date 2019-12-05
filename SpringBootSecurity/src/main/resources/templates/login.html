@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head th:replace="layout::site-head">
+    <title>Sign in</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+
+<body>
+
+<header th:replace="layout::site-header"/>
+
+<div class="container mt-5">
+
+    <div th:if="${param.error}">
+        Invalid username or password.
+        Or you are banned.
+    </div>
+    <div th:if="${param.logout}">
+        You have been logged out.
+    </div>
+
+    <form th:action="@{/login}" method="post">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Username</label>
+            <input type="text" name="username" class="form-control" id="exampleInputEmail1"
+                   placeholder="Your username"/>
+        </div>
+        <p></p>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" name="password" class="form-control" id="exampleInputPassword1"
+                   placeholder="Your password"/>
+        </div>
+        <p></p>
+        <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Remember me</label>
+        </div>
+        <p></p>
+        <a href="login/google" th:href="@{/login/google}">Google</a>
+        <p></p>
+        <div>
+            <button type="submit" class="btn btn-primary">Sign in</button>
+        </div>
+    </form>
+
+</div>
+
+</body>
+
+</html>

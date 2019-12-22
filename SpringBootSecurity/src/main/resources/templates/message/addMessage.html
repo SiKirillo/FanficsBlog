@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout::site-head">
+    <title>New message</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+
+<body>
+
+<header th:replace="layout::site-header"/>
+
+<div class="container mt-5">
+
+    <form th:action="@{/message/addMessage}" method="post">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Tag</label>
+            <input type="text" name="tag" class="form-control" id="exampleInputEmail1"
+                   placeholder="Your tag"/>
+        </div>
+        <p></p>
+
+        <div class="form-group">
+            <label for="exampleInputEmail1">Text</label>
+            <input type="text" name="text" class="form-control" id="exampleInputEmail2"
+                   placeholder="Your text"/>
+        </div>
+        <p></p>
+
+        <div>
+            <button type="submit" class="btn btn-primary">Add message</button>
+        </div>
+    </form>
+
+</div>
+
+</body>
+
+</html>

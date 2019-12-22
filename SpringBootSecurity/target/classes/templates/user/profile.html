@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout::site-head">
+    <title>My profile</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+
+<body>
+
+<header th:replace="layout::site-header"/>
+
+<div class="container mt-5">
+
+    <div class="form-group">
+        <p class="font-weight-bold">
+            Username:
+            <label th:text="${user.username}"></label>
+            <br>
+
+            Status:
+            <label th:text="${user.active == true ? 'Active' : 'Banned'}"></label>
+            <br>
+
+            Authorities:
+            <label th:text="${user.roles}"></label>
+            <br>
+
+            First visit:
+            <label th:text="${user.firstVisit}"></label>
+            <br>
+
+            Last visit:
+            <label th:text="${user.lastVisit}"></label>
+            <br>
+        </p>
+
+        <div style="display: flex">
+            <div>
+                <form th:action="@{/user/edit/{id}(id=${user.id})}" method="post">
+                    <button type="submit" class="btn btn-primary">Edit profile</button>
+                </form>
+            </div>
+            <div style="margin-left: 10px">
+                <form th:action="@{/user/delete/{id}(id=${user.id})}" method="post">
+                    <button type="submit" class="btn btn-primary">Delete profile</button>
+                </form>
+            </div>
+        </div>
+        <p></p>
+
+        <form th:action="@{/user/profile}" enctype="multipart/form-data" method="post">
+            <div class="form-group" style="display: flex">
+                <div>
+                    <input type="file" name="file"/>
+                </div>
+                <div style="margin-left: 10px">
+                    <button type="submit" class="btn btn-primary">Add photo</button>
+                </div>
+            </div>
+        </form>
+
+
+<!--        <div th:if="${user.photoName != null && user.photoName != ''}">-->
+<!--            <img th:src="@{'/img/' + ${user.photoName}}" alt=""/>-->
+<!--        </div>-->
+
+<!--        <div th:unless="">-->
+<!--            <img th:src="@{/img/defalt_avatar.jpg}" alt=""/>-->
+<!--        </div>-->
+
+        <div th:with="result = ${user.photoName != null && user.photoName != ''}">
+            <div th:if="${result}">
+                <img th:src="@{'/img/' + ${user.photoName}}" alt=""/>
+            </div>
+            <div th:unless="${result}">
+                <img th:src="@{/img/defalt_avatar.jpg}" alt=""/>
+            </div>
+        </div>
+
+    </div>
+
+    <table class="table table-striped">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Tag</th>
+            <th scope="col">Text</th>
+            <th scope="col">Author</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+        <tr th:each="m : ${messages}">
+            <th scope="col" th:text="${m.id}"></th>
+            <th scope="col" th:text="${m.tag}"></th>
+            <th scope="col" th:text="${m.text}"></th>
+            <th scope="col" th:text="${m.authorName}"></th>
+            <th scope="col"><a href="/message/edit/" th:href="@{/message/edit/{id}(id=${m.id})}">Edit</a></th>
+            <th scope="col"><a href="/message/delete/" th:href="@{/message/delete/{id}(id=${m.id})}">Delete</a></th>
+        </tr>
+    </table>
+    <p></p>
+
+    <a href="/message/addMessage" th:href="@{/message/addMessage}">Add new massage</a>
+    <p></p>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:replace="layout::site-head">
+    <title>Edit message</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+
+<body>
+
+<header th:replace="layout::site-header"/>
+
+<div class="container mt-5">
+
+    <form th:action="@{/message/update/{id}(id=${message.id})}" th:object="${message}" method="post">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Tag</label>
+            <input type="text" name="tag" class="form-control" id="exampleInputEmail1"
+                   th:value="${message.tag}"/>
+        </div>
+        <p></p>
+
+        <div class="form-group">
+            <label for="exampleInputEmail1">Text</label>
+            <input type="text" name="text" class="form-control" id="exampleInputEmail2"
+                   th:value="${message.text}"/>
+        </div>
+        <p></p>
+
+        <div>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+    </form>
+
+</div>
+
+</body>
+
+</html>

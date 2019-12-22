@@ -15,6 +15,45 @@
         th:text="${#httpServletRequest.remoteUser == null ? 'Hello user!' : ('Hello ' + #httpServletRequest.remoteUser + '!')}"></h1>
 </div>
 
+<div class="container mt-5" th:hidden="${#httpServletRequest.remoteUser == null ? true : false}">
+
+    <form th:action="@{/home}" method="post">
+        <div class="form-group" style="display: flex">
+            <div>
+                <input type="text" name="filter" class="form-control" id="exampleInputEmail1"
+                       placeholder="Your filter"/>
+            </div>
+            <div style="margin-left: 10px">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </form>
+
+    <table class="table table-striped">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Tag</th>
+            <th scope="col">Text</th>
+            <th scope="col">Author</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+        <tr th:each="m : ${messages}">
+            <th scope="col" th:text="${m.id}"></th>
+            <th scope="col" th:text="${m.tag}"></th>
+            <th scope="col" th:text="${m.text}"></th>
+            <th scope="col" th:text="${m.authorName}"></th>
+            <th scope="col"><a href="/message/edit/" th:href="@{/message/edit/{id}(id=${m.id})}">Edit</a></th>
+            <th scope="col"><a href="/message/delete/" th:href="@{/message/delete/{id}(id=${m.id})}">Delete</a></th>
+        </tr>
+    </table>
+    <p></p>
+
+    <a href="/message/addMessage" th:href="@{/message/addMessage}">Add new massage</a>
+    <p></p>
+
+</div>
+
 </body>
 
 </html>

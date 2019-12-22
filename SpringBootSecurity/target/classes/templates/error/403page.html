@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout::site-head">
+    <title>403 page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+
+<body>
+
+<div class="container mt-5">
+    <h1 th:inline="text" th:text="${'Access denied for you, ' + #httpServletRequest.remoteUser}"></h1>
+    <h3 th:inline="text">not enough rights</h3>
+</div>
+
+</body>
+
+</html>

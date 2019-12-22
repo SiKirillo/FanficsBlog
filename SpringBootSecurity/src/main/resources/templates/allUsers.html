@@ -14,14 +14,10 @@
 
     <table class="table table-striped">
         <tr>
-            <th scope="col">
-                <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="checkAllUsers"/>
-                </div>
-            </th>
             <th scope="col">ID</th>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
+            <th scope="col">Role</th>
             <th scope="col">Status</th>
             <th scope="col">First Visit Time</th>
             <th scope="col">Last Visit Time</th>
@@ -29,25 +25,17 @@
             <th scope="col">Delete</th>
         </tr>
         <tr th:each="u : ${users}">
-            <th scope="col">
-                <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" th:id="checkOneUser + ${u.id}"/>
-                </div>
-            </th>
             <th scope="col" th:text="${u.id}"></th>
             <th scope="col" th:text="${u.username}"></th>
             <th scope="col" th:text="${u.email}"></th>
+            <th scope="col" th:text="${u.roles}"></th>
             <th scope="col" th:text="${u.active == true ? 'Active' : 'Banned'}"></th>
             <th scope="col" th:text="${u.firstVisit}"></th>
             <th scope="col" th:text="${u.lastVisit}"></th>
-            <th scope="col"><a href="edit" th:href="@{/edit/{id}(id=${u.id})}">Edit</a></th>
-            <th scope="col"><a href="delete" th:href="@{/delete/{id}(id=${u.id})}">Delete</a></th>
+            <th scope="col"><a href="/user/edit/" th:href="@{/user/edit/{id}(id=${u.id})}">Edit</a></th>
+            <th scope="col"><a href="/user/delete/" th:href="@{/user/delete/{id}(id=${u.id})}">Delete</a></th>
         </tr>
     </table>
-
-    <form th:action="@{/deleteUsers}" method="post">
-        <input class="btn btn-primary" value="Delete this users"/>
-    </form>
 
 </div>
 

@@ -2,20 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:fragment="site-head">
-    <title>Layout</title>
+    <title>Fanfics</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<!--    <link rel="stylesheet" type="text/css" href="css/footer.css">-->
 </head>
 
 <body>
 
 <header th:fragment="site-header" th:remove="tag">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">Spring Boot Blog</a>
+        <a class="navbar-brand" href="/">Fanfics</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -36,6 +35,9 @@
                     <a class="nav-link" href="/allUsers">All users</a>
                 </li>
             </ul>
+            <span th:hidden="${#httpServletRequest.getRemoteUser() == null ? true : false}">
+                <a class="nav-link" href="/user/profile">My profile</a>
+            </span>
             <form th:action="@{/logout}" method="post">
                 <input class="btn btn-primary"
                        th:type="${#httpServletRequest.getRemoteUser() == null ? 'hidden' : 'submit'}"

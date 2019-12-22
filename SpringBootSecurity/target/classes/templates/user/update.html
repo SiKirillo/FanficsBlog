@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:replace="layout::site-head">
+    <title>Edit user</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+
+<body>
+
+<header th:replace="layout::site-header"/>
+
+<div class="container mt-5">
+
+    <form th:action="@{/user/update/{id}(id=${user.id})}" th:object="${user}" method="post">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Username</label>
+            <input type="text" name="username" class="form-control" id="exampleInputEmail1"
+                   th:value="${user.username}"/>
+        </div>
+        <p></p>
+
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email</label>
+            <input type="text" name="email" class="form-control" id="exampleInputEmail2" th:value="${user.email}"/>
+        </div>
+        <p></p>
+
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="text" name="password" class="form-control" id="exampleInputPassword1"
+                   th:value="${user.password}"/>
+        </div>
+        <p></p>
+
+        Roles:
+        <div class="form-group form-check" style="display: flex">
+            <div>
+                <input type="checkbox" name="userRole" class="form-check-input" id="exampleCheck1"
+                       th:checked="${user.roles.contains(T(fanficsBlog.models.Role).USER)} ? 'checked' : null">
+                <label class="form-check-label" for="exampleCheck1">User</label>
+            </div>
+            <div style="margin-left: 30px">
+                <input type="checkbox" name="adminRole" class="form-check-input" id="exampleCheck2"
+                       th:checked="${user.roles.contains(T(fanficsBlog.models.Role).ADMIN)} ? 'checked' : null">
+                <label class="form-check-label" for="exampleCheck2">Admin</label>
+            </div>
+        </div>
+
+        <div class="form-group form-check">
+            <input type="checkbox" name="active" class="form-check-input" id="exampleCheck3" th:value="${user.active}"
+                   th:checked="${user.active == false ? 'checked' : null}"/>
+            <label class="form-check-label" for="exampleCheck3">Ban him?</label>
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+    </form>
+
+</div>
+
+</body>
+
+</html>
